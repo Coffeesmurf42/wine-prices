@@ -1,0 +1,17 @@
+.headerTile {
+    padding-top: 10px;
+    background-color: #FAE9B7;
+}
+
+.rowTile {
+    padding-top: 10px;
+    background-color: lightblue;
+}
+
+.mainHeader {
+    margin-bottom: 50px;
+}
+
+.priceHeader {
+    font-weight: bold;
+}
