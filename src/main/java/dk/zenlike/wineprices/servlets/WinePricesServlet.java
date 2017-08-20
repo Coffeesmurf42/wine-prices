@@ -29,12 +29,21 @@ public class WinePricesServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("winePrices", getWinePrices());
+        final String source = request.getParameter("source");
 
-        request.getRequestDispatcher("wineprices.jsp").forward(request, response);
+        if (source != null && !"".equals(source)) {
+            List<WinePrice> winePrices = getWinePrices(source);
+
+            request.setAttribute("winePrices", winePrices);
+            request.getRequestDispatcher("wineprices.jsp").forward(request, response);
+        }
+        else {
+            badRequest(response, "No source parameter in request!");
+        }
     }
 
-    public static List<WinePrice> getWinePrices() {
+    private List<WinePrice> getWinePrices(String source) {
+        // TODO: Fetch prices based on just a source ID like Philipson - we shouldn't care about source configuration and fetching prices at this point
         List<WinePrice> winePrices = new ArrayList<>();
 
         WinePrice currWinePrice;
@@ -45,6 +54,10 @@ public class WinePricesServlet extends HttpServlet {
         }
 
         return winePrices;
+    }
+
+    private void badRequest(HttpServletResponse response, String msg) throws IOException {
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, msg);
     }
 
 }
