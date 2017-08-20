@@ -20,11 +20,10 @@ public class WinePrice implements Serializable {
 
     @Id private String id;
 
-    private String name;
+    @Index private String name;
     private String url;
     private String price;
     private String amount;
-    private String wineName;
 
     @Index private LocalDateTime timestamp;
 
@@ -72,14 +71,6 @@ public class WinePrice implements Serializable {
         this.amount = amount;
     }
 
-    public String getWineName() {
-        return wineName;
-    }
-
-    public void setWineName(String wineName) {
-        this.wineName = wineName;
-    }
-
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -98,7 +89,6 @@ public class WinePrice implements Serializable {
                 "name='" + name + '\'' +
                 ", price='" + price + '\'' +
                 ", amount='" + amount + '\'' +
-                ", wineName='" + wineName + '\'' +
                 '}';
     }
 

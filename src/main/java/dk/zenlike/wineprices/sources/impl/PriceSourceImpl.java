@@ -1,10 +1,17 @@
 package dk.zenlike.wineprices.sources.impl;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+
 import dk.zenlike.wineprices.sources.PriceSource;
 
+@Entity
 public class PriceSourceImpl implements PriceSource {
 
-    private String name;
+    @Id private String id;
+
+    @Index private String name;
     private String url;
 
     private String priceSelector;

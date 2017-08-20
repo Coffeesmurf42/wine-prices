@@ -1,4 +1,4 @@
-package dk.zenlike.wineprices;
+package dk.zenlike.wineprices.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ import dk.zenlike.wineprices.sources.service.PriceSourceService;
 import dk.zenlike.wineprices.sources.service.impl.FetcherServiceImpl;
 import dk.zenlike.wineprices.sources.service.impl.PhilipsonPriceSourceServiceImpl;
 
-@WebServlet(name = "PhilipsonWinePrices", value = "/philipson")
-public class PhilipsonPrices extends HttpServlet {
+@WebServlet(name = "PhilipsonWinePrices", value = "/wineprices")
+public class WinePricesServlet extends HttpServlet {
 
     private static PriceSourceService priceSourceService = new PhilipsonPriceSourceServiceImpl();
     private static FetcherService fetcherService = new FetcherServiceImpl();

@@ -36,7 +36,7 @@
             <c:forEach var="price" items="${winePrices}">
                 <div class="row">
                     <div class="col-md-3 rowTile">
-                        <p>${price.wineName}&nbsp;<a href="${price.url}"><span class="glyphicon glyphicon-link"></span></a></p>
+                        <p>${price.name}&nbsp;<a href="${price.url}"><span class="glyphicon glyphicon-link"></span></a></p>
                     </div>
                     <div class="col-md-3 rowTile">
                         <p>${price.price} kr.</p>

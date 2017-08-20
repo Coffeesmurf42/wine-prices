@@ -1,17 +1,19 @@
 package dk.zenlike.wineprices.sources.service.impl;
 
-import dk.zenlike.wineprices.model.WinePrice;
-import dk.zenlike.wineprices.sources.PriceSource;
-import dk.zenlike.wineprices.sources.config.impl.PhilipsonSourceConfiguration;
-import dk.zenlike.wineprices.sources.service.FetcherService;
+import java.io.IOException;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import java.time.LocalDateTime;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.LocalDateTime;
+import dk.zenlike.wineprices.model.WinePrice;
+import dk.zenlike.wineprices.sources.PriceSource;
+import dk.zenlike.wineprices.sources.config.impl.PhilipsonSourceConfiguration;
+import dk.zenlike.wineprices.sources.service.FetcherService;
 
 public class FetcherServiceImpl implements FetcherService {
 
@@ -49,12 +51,10 @@ public class FetcherServiceImpl implements FetcherService {
 
         WinePrice winePrice = new WinePrice(PhilipsonSourceConfiguration.SOURCE_NAME);
 
-        winePrice.setName(priceSource.getName());
-        winePrice.setWineName(nameStr);
+        winePrice.setName(nameStr);
         winePrice.setUrl(priceSource.getUrl());
         winePrice.setPrice(priceStr);
         winePrice.setAmount(amountStr);
-        winePrice.setName(nameStr);
         winePrice.setTimestamp(LocalDateTime.now());
 
         return winePrice;
