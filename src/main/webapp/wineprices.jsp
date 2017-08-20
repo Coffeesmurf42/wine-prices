@@ -19,27 +19,33 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 headerTile">
+                <div class="col-md-3 headerTile">
                     <p class="priceHeader">Navn</p>
                 </div>
-                <div class="col-md-4 headerTile">
+                <div class="col-md-3 headerTile">
                     <p class="priceHeader">Pris</p>
                 </div>
-                <div class="col-md-4 headerTile">
+                <div class="col-md-3 headerTile">
                     <p class="priceHeader">Antal</p>
+                </div>
+                <div class="col-md-3 headerTile">
+                    <p class="priceHeader">Dato</p>
                 </div>
             </div>
 
             <c:forEach var="price" items="${winePrices}">
                 <div class="row">
-                    <div class="col-md-4 rowTile">
+                    <div class="col-md-3 rowTile">
                         <p>${price.wineName}&nbsp;<a href="${price.url}"><span class="glyphicon glyphicon-link"></span></a></p>
                     </div>
-                    <div class="col-md-4 rowTile">
+                    <div class="col-md-3 rowTile">
                         <p>${price.price} kr.</p>
                     </div>
-                    <div class="col-md-4 rowTile">
+                    <div class="col-md-3 rowTile">
                         <p>${price.amount}</p>
+                    </div>
+                    <div class="col-md-3 rowTile">
+                        <p>${price.date}</p>
                     </div>
                 </div>
             </c:forEach>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dk.zenlike.wineprices.prices.WinePrice;
+import dk.zenlike.wineprices.model.WinePrice;
 
 import dk.zenlike.wineprices.sources.PriceSource;
 
@@ -19,12 +19,12 @@ import dk.zenlike.wineprices.sources.service.FetcherService;
 import dk.zenlike.wineprices.sources.service.PriceSourceService;
 
 import dk.zenlike.wineprices.sources.service.impl.FetcherServiceImpl;
-import dk.zenlike.wineprices.sources.service.impl.PriceSourceServiceImpl;
+import dk.zenlike.wineprices.sources.service.impl.PhilipsonPriceSourceServiceImpl;
 
 @WebServlet(name = "PhilipsonWinePrices", value = "/philipson")
 public class PhilipsonPrices extends HttpServlet {
 
-    private static PriceSourceService priceSourceService = new PriceSourceServiceImpl();
+    private static PriceSourceService priceSourceService = new PhilipsonPriceSourceServiceImpl();
     private static FetcherService fetcherService = new FetcherServiceImpl();
 
     @Override

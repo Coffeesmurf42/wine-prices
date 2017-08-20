@@ -3,7 +3,7 @@ package dk.zenlike.wineprices;
 import com.google.appengine.api.utils.SystemProperty;
 import dk.zenlike.wineprices.sources.PriceSource;
 import dk.zenlike.wineprices.sources.service.PriceSourceService;
-import dk.zenlike.wineprices.sources.service.impl.PriceSourceServiceImpl;
+import dk.zenlike.wineprices.sources.service.impl.PhilipsonPriceSourceServiceImpl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -44,7 +44,7 @@ public class HelloAppEngine extends HttpServlet {
     public static String getPrice() {
         String priceStr = "";
 
-        PriceSourceService priceSourceService = new PriceSourceServiceImpl();
+        PriceSourceService priceSourceService = new PhilipsonPriceSourceServiceImpl();
         PriceSource priceSource = priceSourceService.getPriceSources().get(0);
 
         final String wineUrlStr = priceSource.getUrl();

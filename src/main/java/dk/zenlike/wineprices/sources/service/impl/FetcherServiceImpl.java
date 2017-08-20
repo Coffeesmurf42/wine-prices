@@ -1,19 +1,21 @@
 package dk.zenlike.wineprices.sources.service.impl;
 
-import dk.zenlike.wineprices.prices.WinePrice;
+import dk.zenlike.wineprices.model.WinePrice;
 import dk.zenlike.wineprices.sources.PriceSource;
+import dk.zenlike.wineprices.sources.config.impl.PhilipsonSourceConfiguration;
 import dk.zenlike.wineprices.sources.service.FetcherService;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
 
 public class FetcherServiceImpl implements FetcherService {
+
+    private static final int CONNECTION_TIMEOUT = 10000;
 
     @Override
     public WinePrice getWinePrice(PriceSource priceSource) {
@@ -34,22 +36,32 @@ public class FetcherServiceImpl implements FetcherService {
 
         if (wineUrl != null) {
             try {
-                Document document = Jsoup.parse(wineUrl, 10000);
+                Document document = Jsoup.parse(wineUrl, CONNECTION_TIMEOUT);
 
-                Element priceElement = document.select(priceSource.getPriceSelector()).get(0);
-                Element amountElement = document.select(priceSource.getAmountSelector()).get(0);
-                Element nameElement = document.select(priceSource.getWineNameSelector()).get(0);
-
-                priceStr = priceElement.text();
-                amountStr = amountElement.text();
-                nameStr = nameElement.text();
+                priceStr = getText(document, priceSource.getPriceSelector());
+                amountStr = getText(document, priceSource.getAmountSelector());
+                nameStr = getText(document, priceSource.getWineNameSelector());
             }
             catch (IOException e) {
                 System.out.println("IO Exception while connecting to wine page");
             }
         }
 
-        return new WinePrice(priceSource.getName(), priceSource.getUrl(), priceStr, amountStr, nameStr);
+        WinePrice winePrice = new WinePrice(PhilipsonSourceConfiguration.SOURCE_NAME);
+
+        winePrice.setName(priceSource.getName());
+        winePrice.setWineName(nameStr);
+        winePrice.setUrl(priceSource.getUrl());
+        winePrice.setPrice(priceStr);
+        winePrice.setAmount(amountStr);
+        winePrice.setName(nameStr);
+        winePrice.setTimestamp(LocalDateTime.now());
+
+        return winePrice;
+    }
+
+    private String getText(Document document, String selector) {
+        return document.select(selector).get(0).text();
     }
 
 }
