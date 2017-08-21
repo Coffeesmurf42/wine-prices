@@ -3,6 +3,6 @@
     <cron>
         <url>/tasks/checkprices</url>
         <description>Daily price check</description>
-        <schedule>every 6 hours</schedule>
+        <schedule>every 12 hours</schedule>
     </cron>
 </cronentries>
