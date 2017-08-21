@@ -49,6 +49,12 @@
                     </div>
                 </div>
             </c:forEach>
+
+            <div class="row">
+                <div class="col-md-12 text-center summaryTile">
+                    Antal vine fra ${sourceName}: ${wineCount}
+                </div>
+            </div>
         </div>
 
         <script src="//code.jquery.com/jquery-3.2.1.js"></script>

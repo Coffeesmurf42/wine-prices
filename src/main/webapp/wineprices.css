@@ -8,6 +8,12 @@
     background-color: lightblue;
 }
 
+.summaryTile {
+    padding-top: 10px;
+    background-color: #FAE9B7;
+    padding-bottom: 10px;
+}
+
 .mainHeader {
     margin-bottom: 50px;
 }
