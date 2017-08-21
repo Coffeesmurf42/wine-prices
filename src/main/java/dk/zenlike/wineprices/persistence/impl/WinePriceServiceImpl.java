@@ -22,7 +22,8 @@ public class WinePriceServiceImpl implements WinePriceService {
 
     @Override
     public List<WinePrice> getWinePricesBySource(String source) {
-        return ObjectifyService.ofy().load().type(WinePrice.class).filter("source", source).list();
+        //return ObjectifyService.ofy().load().type(WinePrice.class).filter("source", source).list();
+        return ObjectifyService.ofy().load().type(WinePrice.class).list();
     }
 
     @Override

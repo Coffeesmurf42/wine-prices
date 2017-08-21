@@ -8,7 +8,7 @@
         <title>Vinpriser</title>
 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="wineprices.css?version=1.3" rel="stylesheet">
+        <link href="wineprices.css?version=1.4" rel="stylesheet">
     </head>
     <body>
         <div class="container">
