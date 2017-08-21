@@ -36,10 +36,10 @@
             <c:forEach var="price" items="${winePrices}">
                 <div class="row">
                     <div class="col-md-6 rowTile">
-                        <p>${price.name}&nbsp;<a href="${price.url}"><span class="glyphicon glyphicon-link"></span></a></p>
+                        <p>${price.name}&nbsp;&nbsp;<a href="${price.url}"><span class="glyphicon glyphicon-link"></span></a></p>
                     </div>
                     <div class="col-md-2 rowTile">
-                        <p>${price.price} kr.</p>
+                        <p>${price.price} kr.&nbsp;&nbsp;<a href="#"><span class="glyphicon glyphicon-eye-open"></span></a></p>
                     </div>
                     <div class="col-md-2 rowTile">
                         <p>${price.amount}</p>
