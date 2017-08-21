@@ -7,20 +7,19 @@ import java.util.UUID;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.Parent;
 
 @Entity
 public class WinePrice implements Serializable {
 
-    @Parent Key<WineSource> source;
-
     @Id private String id;
 
     @Index private String name;
+
+    private String source;
+
     private String url;
     private String price;
     private String amount;
@@ -30,9 +29,9 @@ public class WinePrice implements Serializable {
     // default constructor
     public WinePrice() {};
 
-    public WinePrice(String sourceId) {
+    public WinePrice(String source) {
         this.id = UUID.randomUUID().toString();
-        this.source = Key.create(WineSource.class, sourceId);
+        this.source = source;
     }
 
     public String getId() {
@@ -45,6 +44,14 @@ public class WinePrice implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getUrl() {

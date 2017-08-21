@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import dk.zenlike.wineprices.model.SourceConfiguration;
+
 import dk.zenlike.wineprices.model.WinePrice;
-import dk.zenlike.wineprices.sources.PriceSource;
-import dk.zenlike.wineprices.sources.config.impl.PhilipsonSourceConfiguration;
 import dk.zenlike.wineprices.sources.service.FetcherService;
 
 public class FetcherServiceImpl implements FetcherService {
@@ -20,17 +20,32 @@ public class FetcherServiceImpl implements FetcherService {
     private static final int CONNECTION_TIMEOUT = 10000;
 
     @Override
-    public WinePrice getWinePrice(PriceSource priceSource) {
+    public WinePrice getWinePrice(String urlStr, SourceConfiguration sourceConfig) {
+        WinePrice winePrice = new WinePrice(sourceConfig.getSourceName());
+
+        configureWinePrice(winePrice, sourceConfig, urlStr);
+
+        return winePrice;
+    }
+
+    @Override
+    public void updateWinePrice(WinePrice winePrice, SourceConfiguration sourceConfig) {
+        configureWinePrice(winePrice, sourceConfig, winePrice.getUrl());
+    }
+
+    private String getText(Document document, String selector) {
+        return document.select(selector).get(0).text();
+    }
+
+    private void configureWinePrice(WinePrice winePrice, SourceConfiguration sourceConfig, String urlStr) {
         String priceStr = "";
         String amountStr = "";
         String nameStr = "";
 
-        final String wineUrlStr = priceSource.getUrl();
-
         URL wineUrl = null;
 
         try {
-            wineUrl = new URL(wineUrlStr);
+            wineUrl = new URL(urlStr);
         }
         catch (MalformedURLException e) {
             System.out.println("Malformed URL for wine page");
@@ -40,28 +55,21 @@ public class FetcherServiceImpl implements FetcherService {
             try {
                 Document document = Jsoup.parse(wineUrl, CONNECTION_TIMEOUT);
 
-                priceStr = getText(document, priceSource.getPriceSelector());
-                amountStr = getText(document, priceSource.getAmountSelector());
-                nameStr = getText(document, priceSource.getWineNameSelector());
+                priceStr = getText(document, sourceConfig.getPriceSelector());
+                amountStr = getText(document, sourceConfig.getAmountSelector());
+                nameStr = getText(document, sourceConfig.getNameSelector());
             }
             catch (IOException e) {
                 System.out.println("IO Exception while connecting to wine page");
             }
         }
 
-        WinePrice winePrice = new WinePrice(PhilipsonSourceConfiguration.SOURCE_NAME);
 
         winePrice.setName(nameStr);
-        winePrice.setUrl(priceSource.getUrl());
+        winePrice.setUrl(urlStr);
         winePrice.setPrice(priceStr);
         winePrice.setAmount(amountStr);
         winePrice.setTimestamp(LocalDateTime.now());
-
-        return winePrice;
-    }
-
-    private String getText(Document document, String selector) {
-        return document.select(selector).get(0).text();
     }
 
 }

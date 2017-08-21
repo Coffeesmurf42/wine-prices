@@ -4,10 +4,10 @@ import dk.zenlike.wineprices.model.SourceConfiguration;
 import dk.zenlike.wineprices.model.WinePrice;
 import dk.zenlike.wineprices.sources.PriceSource;
 
-public interface FetcherService {
+import java.util.List;
 
-    WinePrice getWinePrice(String urlStr, SourceConfiguration sourceConfig);
+public interface WinePriceService {
 
-    void updateWinePrice(WinePrice winePrice, SourceConfiguration sourceConfig);
+    List<WinePrice> getPrices(SourceConfiguration sourceConfig);
 
 }

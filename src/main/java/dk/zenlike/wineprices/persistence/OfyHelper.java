@@ -1,13 +1,12 @@
 package dk.zenlike.wineprices.persistence;
 
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
-import com.googlecode.objectify.ObjectifyService;
-import dk.zenlike.wineprices.model.WinePrice;
-import dk.zenlike.wineprices.model.WineSource;
-
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
+
+import com.googlecode.objectify.ObjectifyService;
+
+import dk.zenlike.wineprices.model.WinePrice;
+import dk.zenlike.wineprices.model.SourceConfiguration;
 
 /**
  * OfyHelper, a ServletContextListener, is setup in web.xml to run before a JSP is run.  This is
@@ -18,7 +17,7 @@ public class OfyHelper implements ServletContextListener {
         // This will be invoked as part of a warmup request, or the first user request if no warmup
         // request.
         ObjectifyService.register(WinePrice.class);
-        ObjectifyService.register(WineSource.class);
+        ObjectifyService.register(SourceConfiguration.class);
     }
 
     public void contextDestroyed(ServletContextEvent event) {

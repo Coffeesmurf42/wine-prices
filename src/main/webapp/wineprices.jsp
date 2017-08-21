@@ -29,7 +29,7 @@
                     <p class="priceHeader">Antal</p>
                 </div>
                 <div class="col-md-2 headerTile">
-                    <p class="priceHeader">Dato</p>
+                    <p class="priceHeader">Opdateret</p>
                 </div>
             </div>
 
